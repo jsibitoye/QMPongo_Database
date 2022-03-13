@@ -1,0 +1,113 @@
+﻿<%@ Master Language="VB" CodeFile="MasterPage.master.vb" Inherits="Master_Pages_MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="../Styles/QM_StyleSheet.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .style1
+        {
+            text-align: center;
+        }
+        #logo
+        {
+            height: 104px;
+            width: 110px;
+        }
+        #Footer
+        {
+            width: 812px;
+            margin-left: 186px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <div id = "Header">
+
+           <div id = "logo">              
+
+           </div>
+
+            <h1 class="style1">
+                QMPongo.com</h1>
+
+        </div>
+
+        <div id = "Menu">
+            <asp:Menu ID="Menu1" runat="server" DataSourceID="SiteMapDataSource1" 
+                BackColor="#FFFF99" BorderColor="#FF9900" BorderStyle="Double" 
+                DynamicVerticalOffset="10" Font-Bold="True" Font-Names="Arial" 
+                Font-Overline="False" Font-Underline="False" ForeColor="#660033" Height="200px" 
+                RenderingMode="Table" Width="212px">
+                <DynamicHoverStyle BackColor="Lime" BorderColor="Black" BorderStyle="Solid" 
+                    BorderWidth="3px" Font-Italic="True" Font-Names="Times New Roman" 
+                    Font-Overline="False" Width="150px" />
+                <DynamicMenuItemStyle BackColor="Red" BorderColor="#0066FF" BorderStyle="Solid" 
+                    BorderWidth="2px" Font-Bold="True" Font-Italic="True" 
+                    Font-Names="Times New Roman" Width="150px" />
+                <StaticHoverStyle BackColor="Fuchsia" BorderColor="#FF0066" BorderStyle="Solid" 
+                    BorderWidth="2px" />
+                <StaticMenuItemStyle BorderColor="#006600" BorderStyle="Solid" 
+                    BorderWidth="2px" />
+            </asp:Menu>
+            <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" 
+                ShowStartingNode="False" />
+
+
+
+            <asp:LoginView ID="LoginView1" runat="server">
+                <AnonymousTemplate>
+                    <asp:Login ID="Login1" runat="server" BackColor="#CCCCCC" 
+    BorderColor="Black" BorderStyle="Solid" BorderWidth="3px" 
+    CreateUserText="Sign Up for a New Account" CreateUserUrl="~/Register.aspx">
+                    </asp:Login>
+                </AnonymousTemplate>
+                <LoggedInTemplate>
+                    You are already logged in.
+                    <asp:LoginStatus ID="LoginStatus3" runat="server" />
+                </LoggedInTemplate>
+                <RoleGroups>
+                    <asp:RoleGroup Roles="VIP">
+                        <ContentTemplate>
+                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/VIP_Test.aspx">For VIP Only</asp:HyperLink>
+                        </ContentTemplate>
+                    </asp:RoleGroup>
+                </RoleGroups>
+            </asp:LoginView>
+
+
+
+        </div>
+
+        <div id = "empty"> &nbsp </div>
+
+        <div id = "MainContent">
+
+            <asp:ContentPlaceHolder ID="cpMainContent" runat="server">
+
+            </asp:ContentPlaceHolder>
+
+        </div>
+
+        <div id = "Footer">
+            <asp:SiteMapPath ID="SiteMapPath1" runat="server">
+            </asp:SiteMapPath>
+            <br />
+            <asp:LoginName ID="LoginName1" runat="server" FormatString="Logged in as {0}" />
+            &nbsp;<asp:LoginView ID="LoginView2" runat="server">
+                <LoggedInTemplate>
+                    (<asp:LoginStatus ID="LoginStatus2" runat="server" LogoutAction = "Redirect" LogoutPageUrl = "~/Default.aspx"/>)
+                </LoggedInTemplate>
+            </asp:LoginView>
+        </div>
+
+
+    </form>
+</body>
+</html>
